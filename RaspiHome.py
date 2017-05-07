@@ -23,9 +23,16 @@ class RaspiHome(QMainWindow):
         self.menuWidge = menuWidge = QWidget()
         self.moduleWidge = moduleWidge = QStackedWidget()
 
+        self.weatherBttn = QPushButton("Weather")
+        self.closeBttn = QPushButton("Exit")
+
+        self.weatherBttn.clicked.connect(print("weather"))
+        self.closeBttn.clicked.connect(self.close())
+
         formlayout = QFormLayout()
         menuWidge.setLayout(formlayout)
-        formlayout.addRow(QPushButton("Weather"))
+        formlayout.addRow(self.weatherBttn)
+        formlayout.addRow(self.closeBttn)
 
         moduleWidge.addWidget(self.weather)
 

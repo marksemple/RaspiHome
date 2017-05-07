@@ -5,14 +5,16 @@
 
 import sys
 import time
+import json
 from PyQt5.QtCore import (QThread, pyqtSignal)
 from PyQt5.QtWidgets import (QApplication, QWidget, QLabel,
-                             QVBoxLayout, QHBoxLayout, QFormLayout)
-
+                             QFormLayout)
 from apixu.client import ApixuClient, ApixuException
-api_key = 'b492f5ea38b743dd94a233559172904'
 
-# current = client.getCurrentWeather(q='Toronto')
+with open('./weather_api_key.json') as data_file:
+    api_key = json.load(data_file)['api_key']
+    data_file.close()
+
 
 class weatherWidget(QWidget):
     def __init__(self, *args, **kwargs):
@@ -54,11 +56,11 @@ class weatherWidget(QWidget):
 
         self.cityLabel.setText('{}'.format(cityName))
         self.dateLabel.setText('{}'.format(localTime))
-        self.tempLabel.setText('{} °C'.format(currentTemp))
+        self.tempLabel.setText('{} ° C'.format(currentTemp))
         self.Symbol.setText('{}'.format(condition))
-        self.feelslike.setText('{} °C'.format(feelsLike))
+        self.feelslike.setText('{} ° C'.format(feelsLike))
         self.wind.setText('{} km/h {}'.format(wind['speed'], wind['dir']))
-        self.dailyHigh.setText('{} °C'.format(dailyHi))
+        self.dailyHigh.setText('{} ° C'.format(dailyHi))
         self.sunset.setText('{}'.format(sunset))
 
 
