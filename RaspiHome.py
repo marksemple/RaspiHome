@@ -1,8 +1,9 @@
 #
-""" """
+""" RaspiHome -- a basic home-console application to show weather etc"""
 
 import sys
 
+from PyQt5.QtCore import (Qt,)
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget,
                              QStackedWidget, QFormLayout, QSplitter,
                              QPushButton)
@@ -16,8 +17,8 @@ class RaspiHome(QMainWindow):
         super().__init__()
         self.weather = weatherWidget(parent=self)
         self.defineLayout()
-        # style =
         resources.setStyleSheet(self, './StyleSheet.txt')
+        self.setWindowFlags(Qt.FramelessWindowHint)
 
     def defineLayout(self):
         self.menuWidge = menuWidge = QWidget()
@@ -26,8 +27,8 @@ class RaspiHome(QMainWindow):
         self.weatherBttn = QPushButton("Weather")
         self.closeBttn = QPushButton("Exit")
 
-        self.weatherBttn.clicked.connect(print("weather"))
-        self.closeBttn.clicked.connect(self.close())
+        self.weatherBttn.clicked.connect(lambda: print("weather"))
+        self.closeBttn.clicked.connect(self.close)
 
         formlayout = QFormLayout()
         menuWidge.setLayout(formlayout)
@@ -43,10 +44,9 @@ class RaspiHome(QMainWindow):
         self.setCentralWidget(splitter)
 
 
-
 if __name__ == "__main__":
 
     app = QApplication(sys.argv)
     home = RaspiHome()
-    home.show()
+    home.showFullScreen()
     app.exec_()

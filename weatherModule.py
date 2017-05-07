@@ -37,6 +37,7 @@ class weatherWidget(QWidget):
         formLayout = QFormLayout()
         formLayout.addRow(self.cityLabel, self.dateLabel)
         formLayout.addRow(self.tempLabel, self.Symbol)
+        formLayout.addRow("Feels like", self.feelslike)
         formLayout.addRow("Daily high", self.dailyHigh)
         formLayout.addRow("Wind", self.wind)
         formLayout.addRow("Sunset", self.sunset)
